@@ -79,16 +79,18 @@
             <h3 class="trophies__body-title">
                 Trophyroom
             </h3>
-            <div class="trophies__tabs">
-                <button class="generic-button-reset trophies__tab trophies__tab_state_active" type="button">
+            <div class="trophies__tabs" role="tablist">
+                <button class="generic-button-reset trophies__tab trophies__tab_state_active"
+                    type="button" role="tab" aria-selected="true" data-tab-button="achievements">
                     Achievements
                 </button>
-                <button class="generic-button-reset trophies__tab" type="button">
+                <button class="generic-button-reset trophies__tab" type="button" role="tab"
+                    aria-selected="false" data-tab-button="subs">
                     Subs
                 </button>
             </div>
 
-            <div class="trophies__trophy-list">
+            <div class="trophies__trophy-list" role="tabpanel" data-tab-panel="achievements">
                 <div class="trophies__trophy-item">
                     <img src="images/kyc.png" alt="KYC" class="trophies__trophy-image">
                     <p class="trophies__trophy-name">KYC</p>
@@ -137,6 +139,17 @@
                         These are not all of the available achievements. Try to find all of them anyway. Because that is
                         the
                         Greatest Achievement.
+                    </p>
+                </div>
+            </div>
+
+            <div class="trophies__subs trophies__panel_hidden" role="tabpanel" data-tab-panel="subs">
+                <div class="trophies__subs-card">
+                    <h4 class="trophies__subs-title">
+                        There&rsquo;s <span class="trophies__subs-title-highlight">nothing</span> here
+                    </h4>
+                    <p class="trophies__subs-description">
+                        Consider subscribing to one of the creators on Para to see your achievements here
                     </p>
                 </div>
             </div>
@@ -189,6 +202,7 @@
     </main>
     <script src="scripts/help-modal.js" defer></script>
     <script src="scripts/sidebar-layout.js" defer></script>
+    <script src="scripts/trophies-tabs.js" defer></script>
 </body>
 
 </html>

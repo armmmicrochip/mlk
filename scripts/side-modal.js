@@ -3,9 +3,11 @@
 
     function openModal(modal) {
         if (!modal) return;
+        prefillModal(modal);
         modal.dataset.state = "open";
         document.body.classList.add("side-modal-open");
         openModals.add(modal);
+        syncSubmitGate(modal);
 
         const firstField = modal.querySelector(
             "input:not([type='hidden']), select, textarea, .form-field__trigger, .side-modal__list-button, button:not([data-modal-close])"
@@ -35,6 +37,17 @@
         form.querySelectorAll("[data-select-for]").forEach((hidden) => {
             hidden.value = "";
         });
+        form.querySelectorAll("input[type='text'][data-was-password]").forEach((input) => {
+            input.type = "password";
+            input.removeAttribute("data-was-password");
+            const btn = input.parentElement?.querySelector("[data-password-toggle]");
+            if (btn) {
+                const icon = btn.querySelector(".form-field__action-icon");
+                if (icon) icon.src = "images/eye-closed.svg";
+                btn.setAttribute("aria-label", "Show password");
+            }
+        });
+        syncSubmitGate(modal);
     }
 
     function resetTrigger(trigger) {
@@ -51,15 +64,17 @@
     function getFieldControl(field) {
         const trigger = field.querySelector(".form-field__trigger");
         if (trigger) {
-            return { el: trigger, isEmpty: trigger.dataset.empty === "true" };
+            return { el: trigger, isEmpty: trigger.dataset.empty === "true", value: trigger.dataset.value || "" };
         }
         const control = field.querySelector("input:not([type='hidden']), select, textarea");
         if (control) {
-            return { el: control, isEmpty: (control.value || "").trim() === "" };
+            const value = (control.value || "").trim();
+            return { el: control, isEmpty: value === "", value };
         }
         const hidden = field.querySelector("input[type='hidden']");
         if (hidden) {
-            return { el: hidden, isEmpty: (hidden.value || "").trim() === "" };
+            const value = (hidden.value || "").trim();
+            return { el: hidden, isEmpty: value === "", value };
         }
         return null;
     }
@@ -71,15 +86,38 @@
             if (!found) return;
             if (found.isEmpty) {
                 field.dataset.state = "error";
+                setFieldError(field, field.dataset.fieldErrorRequired || defaultErrorText(field));
                 if (!firstInvalid) firstInvalid = found.el;
-            } else {
-                field.removeAttribute("data-state");
+                return;
+            }
+            field.removeAttribute("data-state");
+
+            const matchId = field.dataset.matchWith;
+            if (matchId) {
+                const other = document.getElementById(matchId);
+                if (other && other.value !== found.value) {
+                    field.dataset.state = "error";
+                    setFieldError(field, field.dataset.fieldErrorMismatch || "Values don't match");
+                    if (!firstInvalid) firstInvalid = found.el;
+                }
             }
         });
         if (firstInvalid && typeof firstInvalid.focus === "function") {
             firstInvalid.focus();
         }
         return !firstInvalid;
+    }
+
+    function defaultErrorText(field) {
+        const el = field.querySelector(".form-field__error");
+        return el ? el.dataset.defaultText || el.textContent : "";
+    }
+
+    function setFieldError(field, text) {
+        const el = field.querySelector(".form-field__error");
+        if (!el) return;
+        if (!el.dataset.defaultText) el.dataset.defaultText = el.textContent;
+        if (text) el.textContent = text;
     }
 
     function applyOption(option) {
@@ -105,7 +143,57 @@
         closeModal(modal);
     }
 
+    function prefillModal(modal) {
+        modal.querySelectorAll("[data-prefill-target]").forEach((input) => {
+            const fromSelector = input.dataset.prefillTarget;
+            const source = fromSelector ? document.querySelector(fromSelector) : null;
+            if (!source) return;
+            const value = (source.textContent || "").trim();
+            input.value = value;
+        });
+    }
+
+    function syncSubmitGate(modal) {
+        if (!modal) return;
+        const form = modal.querySelector("form[data-submit-gate]");
+        if (!form) return;
+        const submit = form.querySelector("[type='submit']");
+        if (!submit) return;
+        let allFilled = true;
+        form.querySelectorAll("[data-validate]").forEach((field) => {
+            const found = getFieldControl(field);
+            if (!found || found.isEmpty) allFilled = false;
+        });
+        submit.disabled = !allFilled;
+    }
+
+    function togglePassword(button) {
+        const field = button.closest(".form-field__control");
+        if (!field) return;
+        const input = field.querySelector(".form-input");
+        if (!input) return;
+        const icon = button.querySelector(".form-field__action-icon");
+        if (input.type === "password") {
+            input.type = "text";
+            input.dataset.wasPassword = "true";
+            if (icon) icon.src = "images/eye.svg";
+            button.setAttribute("aria-label", "Hide password");
+        } else {
+            input.type = "password";
+            input.removeAttribute("data-was-password");
+            if (icon) icon.src = "images/eye-closed.svg";
+            button.setAttribute("aria-label", "Show password");
+        }
+    }
+
     document.addEventListener("click", (event) => {
+        const pwToggle = event.target.closest("[data-password-toggle]");
+        if (pwToggle) {
+            event.preventDefault();
+            togglePassword(pwToggle);
+            return;
+        }
+
         const option = event.target.closest("[data-option-for]");
         if (option) {
             applyOption(option);
@@ -151,13 +239,16 @@
     document.addEventListener("input", (event) => {
         const control = event.target;
         const field = control.closest(".form-field");
-        if (!field) return;
-        if (field.dataset.state === "error" && (control.value || "").trim() !== "") {
-            field.removeAttribute("data-state");
+        if (field) {
+            if (field.dataset.state === "error" && (control.value || "").trim() !== "") {
+                field.removeAttribute("data-state");
+            }
+            if (control.matches(".form-select")) {
+                syncSelectEmpty(control);
+            }
         }
-        if (control.matches(".form-select")) {
-            syncSelectEmpty(control);
-        }
+        const modal = control.closest(".side-modal");
+        if (modal) syncSubmitGate(modal);
     });
 
     document.addEventListener("change", (event) => {

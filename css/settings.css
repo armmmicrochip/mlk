@@ -141,6 +141,7 @@
     align-items: center;
     gap: 2rem;
     max-width: 28.5rem;
+    text-align: left;
 }
 
 .settings-page__social-icon {

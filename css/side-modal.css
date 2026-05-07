@@ -1,9 +1,7 @@
 :root {
     --side-modal-width: 47rem;
-    --side-modal-bg: #4923a3;
     --side-modal-radius: 2.4rem;
     --side-modal-duration: 280ms;
-    --side-modal-overlay: rgba(0, 0, 0, 0.55);
 }
 
 .side-modal {
@@ -27,7 +25,7 @@
 .side-modal__overlay {
     position: absolute;
     inset: 0;
-    background-color: var(--side-modal-overlay);
+    background-color: var(--color-modal-overlay);
     opacity: 0;
     transition: opacity var(--side-modal-duration) ease;
 }
@@ -40,7 +38,7 @@
     width: 100%;
     max-width: 44rem;
     height: 100%;
-    background-color: #200054;
+    background-color: var(--color-modal-surface);
     border-radius: var(--side-modal-radius);
     transform: translateX(100%);
     transition: transform var(--side-modal-duration) ease;
@@ -210,6 +208,43 @@ body.side-modal-open {
     .side-modal__list-button {
         padding: 1.6rem 2rem;
     }
+}
+
+/* Grid variant: 4-col tile grid for social brand picker */
+.side-modal__body_variant_grid {
+    padding: 3.4rem 2rem 2rem;
+    gap: 1.6rem;
+    justify-content: unset;
+}
+
+.side-modal__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.side-modal__grid-tile {
+    aspect-ratio: 1;
+    width: 100%;
+    border-radius: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 180ms ease, border-radius var(--transition-timing), filter 180ms ease;
+    background-color: var(--white-15);
+}
+
+.side-modal__grid-tile:hover {
+    transform: scale(1.05);
+    border-radius: var(--hover-radius);
+    filter: brightness(1.08);
+}
+
+.side-modal__grid-tile-icon {
+    width: 55%;
+    height: 55%;
+    display: block;
 }
 
 @media screen and (max-width: 768px) {

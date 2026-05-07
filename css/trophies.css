@@ -1,155 +1,197 @@
 .trophies__header {
-    position: fixed;
-    top: 0;
-    left: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 .trophies__body {
-    padding: 8rem 2rem 6rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  padding: 8rem 2rem 6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .trophies__body-icon {
-    width: 6.8rem;
-    height: 10rem;
-    margin-bottom: 1.5rem;
+  width: 6.8rem;
+  height: 10rem;
+  margin-bottom: 1.5rem;
 }
 
 .trophies__body-text {
-    letter-spacing: -0.05rem;
-    margin-bottom: 0.5rem;
-    color: var(--color-accent);
+  letter-spacing: -0.05rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-accent);
 }
 
 .trophies__body-title {
-    font-size: 6.96rem;
-    line-height: 6.38rem;
-    font-family: "Plus Jakarta Sans";
-    color: var(--color-accent);
-    letter-spacing: -0.075rem;
-    font-weight: 500;
-    margin-bottom: 3rem;
+  font-size: 6.96rem;
+  line-height: 6.38rem;
+  font-family: "Plus Jakarta Sans";
+  color: var(--color-accent);
+  letter-spacing: -0.075rem;
+  font-weight: 500;
+  margin-bottom: 3rem;
 }
 
 .trophies__tabs {
-    display: flex;
-    align-items: center;
-    border-radius: 10rem;
-    background-color: var(--color-surface-panel-muted);
-    margin-bottom: 3rem;
+  display: flex;
+  align-items: center;
+  border-radius: 10rem;
+  background-color: var(--color-surface-panel-muted);
+  margin-bottom: 3rem;
 }
 
 .trophies__tab {
-    font-size: 2rem;
-    line-height: 2rem;
-    font-family: "Plus Jakarta Sans";
-    color: var(--color-text-primary);
-    cursor: pointer;
-    border-radius: 10rem;
-    padding: 1.4rem;
+  font-size: 2rem;
+  line-height: 2rem;
+  font-family: "Plus Jakarta Sans";
+  color: var(--color-text-primary);
+  cursor: pointer;
+  border-radius: 10rem;
+  padding: 1.4rem;
 }
 
 .trophies__tab_state_active {
-    color: var(--color-accent);
-    background-color: var(--color-surface-panel);
+  color: var(--color-accent);
+  background-color: var(--color-surface-panel);
 }
 
 .trophies__trophy-list {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: stretch;
-    gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 1rem;
 }
 
 .trophies__trophy-item {
-    width: calc(25% - (3rem / 4));
-    background-color: var(--color-surface-panel-muted);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 3rem;
-    padding-bottom: 9rem;
+  width: calc(25% - (3rem / 4));
+  background-color: var(--color-surface-panel-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 3rem;
+  padding-bottom: 9rem;
 
-    &:not(.trophies__trophy-item_type_empty) {
-        border: .1rem solid var(--white-15);
-    }
+  &:not(.trophies__trophy-item_type_empty) {
+    border: 0.1rem solid var(--white-15);
+  }
 }
 
 .trophies__trophy-item_type_empty {
-    background-color: transparent;
+  background-color: transparent;
 }
 
 .trophies__trophy-image {
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: auto;
 }
 
 .trophies__trophy-name {
-    font-size: 3.24rem;
-    line-height: 3.33rem;
-    font-family: "Plus Jakarta Sans";
-    color: var(--color-accent);
-    letter-spacing: -0.075rem;
-    margin-bottom: 1.5rem;
-    max-width: 100%;
-    padding-inline: 1rem;
-    text-align: center;
-    overflow-wrap: break-word;
-    word-break: break-word;
+  font-size: 3.24rem;
+  line-height: 3.33rem;
+  font-family: "Plus Jakarta Sans";
+  color: var(--color-accent);
+  letter-spacing: -0.075rem;
+  margin-bottom: 1.5rem;
+  max-width: 100%;
+  padding-inline: 1rem;
+  text-align: center;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .trophies__trophy-description {
-    font-size: 1.89rem;
-    font-family: "Plus Jakarta Sans";
-    color: var(--color-text-primary);
-    text-align: center;
-    max-width: 29rem;
-    height: auto;
-    overflow-wrap: break-word;
-    word-break: break-word;
+  font-size: 1.89rem;
+  font-family: "Plus Jakarta Sans";
+  color: var(--color-text-primary);
+  text-align: center;
+  max-width: 29rem;
+  height: auto;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .trophies__trophy-empty-text {
-    color: var(--color-text-muted);
+  color: var(--color-text-muted);
+}
+
+[data-tab-panel].trophies__panel_hidden {
+  display: none;
+}
+
+.trophies__subs {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 5rem 0 20rem;
+}
+
+.trophies__subs-card {
+  width: 35.5rem;
+  max-width: 100%;
+  padding: 2.4rem 2.8rem;
+  background-color: var(--color-surface-panel);
+  border-radius: 2.4rem;
+  text-align: center;
+}
+
+.trophies__subs-title {
+  font-family: "Plus Jakarta Sans";
+  font-size: 3rem;
+  line-height: 3rem;
+  font-weight: 700;
+  color: white;
+  letter-spacing: -0.05rem;
+  margin-bottom: 1rem;
+}
+
+.trophies__subs-title-highlight {
+  color: var(--color-highlight-pink);
+}
+
+.trophies__subs-description {
+  font-family: "Plus Jakarta Sans";
+  font-size: 1.4rem;
+  line-height: 1.8rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 @media screen and (max-width: 1407px) {
-    .trophies__trophy-item {
-        width: calc((100% / 3) - (2rem / 3));
-    }
+  .trophies__trophy-item {
+    width: calc((100% / 3) - (2rem / 3));
+  }
 }
 
 @media screen and (max-width: 1200px) {
-    .trophies__body-title {
-        font-size: 4.63rem;
-        line-height: 4.5rem;
-    }
+  .trophies__body-title {
+    font-size: 4.63rem;
+    line-height: 4.5rem;
+  }
 
-    .trophies__trophy-name {
-        font-size: 1.84rem;
-        line-height: 2rem;
-        margin-bottom: 1rem;
-    }
+  .trophies__trophy-name {
+    font-size: 1.84rem;
+    line-height: 2rem;
+    margin-bottom: 1rem;
+  }
 
-    .trophies__trophy-description {
-        font-size: 1.44rem;
-    }
+  .trophies__trophy-description {
+    font-size: 1.44rem;
+  }
 }
 
 @media screen and (max-width: 991px) {
-    .trophies__trophy-list {
-        gap: .5rem;
-    }
+  .trophies__trophy-list {
+    gap: 0.5rem;
+  }
 
-    .trophies__trophy-item {
-        width: calc(50% - (.5rem / 2));
-    }
+  .trophies__trophy-item {
+    width: calc(50% - (0.5rem / 2));
+  }
 
-    .trophies__trophy-name,
-    .trophies__trophy-description {
-        padding-inline: .5rem;
-        padding-inline: 1rem;
-    }
+  .trophies__trophy-name,
+  .trophies__trophy-description {
+    padding-inline: 0.5rem;
+    padding-inline: 1rem;
+  }
 }
