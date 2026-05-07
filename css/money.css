@@ -77,6 +77,11 @@
   overflow-wrap: break-word;
   word-break: break-word;
   min-width: 0;
+  font-weight: 700;
+  font-size: 3.4rem;
+  line-height: 3.3rem;
+  font-family: "Plus Jakarta Sans";
+  text-wrap: wrap
 }
 
 .money-page__withdraw-currency {
@@ -105,7 +110,7 @@
   height: 1.6rem;
 }
 
-.money-page__withdraw-method + .money-page__withdraw-method::after {
+.money-page__withdraw-method+.money-page__withdraw-method::after {
   content: "";
   position: absolute;
   right: 0;

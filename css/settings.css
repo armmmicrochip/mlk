@@ -13,6 +13,7 @@
     position: relative;
     margin-bottom: 1.3rem;
     transition: border-radius var(--transition-timing);
+    cursor: pointer;
 
     &:not(:disabled):hover {
         border-radius: var(--hover-radius);
@@ -153,6 +154,10 @@
     height: auto;
     white-space: normal;
     word-break: break-all;
+}
+
+.settings-page__image-input {
+    display: none;
 }
 
 @media screen and (max-width: 1200px) {

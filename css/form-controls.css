@@ -21,8 +21,7 @@
     align-items: center;
     height: var(--form-field-height);
     border-radius: var(--form-field-radius);
-    background-color: var(--form-field-bg);
-    border: 1px solid var(--form-field-border);
+    background-color: #42276e;
     transition: border-color 180ms ease, box-shadow 180ms ease;
 }
 
@@ -31,8 +30,7 @@
 }
 
 .form-field[data-state="error"] .form-field__control {
-    border-color: var(--form-error);
-    box-shadow: 0 0 2.4rem .2rem var(--form-error-glow);
+    border: 1px solid var(--form-error);
 }
 
 .form-input,
@@ -51,6 +49,7 @@
     appearance: none;
     -webkit-appearance: none;
 }
+
 
 .form-input::placeholder {
     color: transparent;
@@ -71,7 +70,7 @@
     left: var(--form-field-padding-x);
     top: 50%;
     transform: translateY(-50%);
-    color: var(--white-70);
+    color: var(--white-50);
     font-family: "Plus Jakarta Sans", "AdvancedLevel Inter", sans-serif;
     font-size: 1.5rem;
     line-height: 1.8rem;
@@ -80,12 +79,12 @@
     transition: top 180ms ease, transform 180ms ease, font-size 180ms ease, color 180ms ease;
 }
 
-.form-input:focus ~ .form-field__label,
-.form-input:not(:placeholder-shown) ~ .form-field__label,
-.form-select:focus ~ .form-field__label,
-.form-select:not([data-empty="true"]) ~ .form-field__label,
-.form-field__trigger[data-empty="false"] ~ .form-field__label,
-.form-field__trigger:focus ~ .form-field__label {
+.form-input:focus~.form-field__label,
+.form-input:not(:placeholder-shown)~.form-field__label,
+.form-select:focus~.form-field__label,
+.form-select:not([data-empty="true"])~.form-field__label,
+.form-field__trigger[data-empty="false"]~.form-field__label,
+.form-field__trigger:focus~.form-field__label {
     top: 1.2rem;
     transform: translateY(0);
     font-size: 1.1rem;
@@ -155,24 +154,22 @@
 
 .form-button {
     width: 100%;
-    min-height: 6.4rem;
-    padding: 1.6rem 2rem;
+    height: 6rem;
+    padding: 1rem 2rem;
     border-radius: 3.4rem;
     background-color: var(--color-accent);
-    color: var(--color-text-dark);
-    font-family: "Plus Jakarta Sans", "AdvancedLevel Inter", sans-serif;
-    font-size: 1.7rem;
+    color: black;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 1.5rem;
     line-height: 2rem;
-    font-weight: 700;
+    font-weight: 600;
     cursor: pointer;
     border: 0;
     transition: border-radius var(--transition-timing), box-shadow 180ms ease, opacity 180ms ease;
-    box-shadow: 0 0 6rem -1rem var(--color-accent);
 }
 
 .form-button:hover:not(:disabled) {
     border-radius: var(--hover-radius);
-    box-shadow: 0 0 10rem -1rem var(--color-accent);
 }
 
 .form-button:active:not(:disabled) {

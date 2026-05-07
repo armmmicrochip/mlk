@@ -71,6 +71,11 @@
     cursor: pointer;
     text-decoration: none;
     color: var(--white-50);
+    transition: color var(--transition-timing);
+
+    &:hover {
+        color: var(--white-100);
+    }
 }
 
 @media screen and (max-width: 1200px) {
